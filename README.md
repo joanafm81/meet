@@ -92,4 +92,6 @@
 
 **Then** the app should show a chart with the number of upcoming events in each city
 
+# Serverless functions
 
+The Meet App will use serverless functions for authorization. An OAuth consumer will be created to allow serving authorization tokens, which in turn will be used in every request when getting data about events from the Google Calendar API.
