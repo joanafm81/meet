@@ -72,4 +72,26 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   });
 
+  test('App passes "numberOfEvents" state as a prop to Eventlist', async () => {
+    const AppWrapper = mount(<App />);
+    const AppNumberofEventsState = AppWrapper.state('numberOfEvents');
+    expect(AppNumberofEventsState).not.toEqual(undefined);
+    expect(AppWrapper.find(EventList).props().numberOfEvents).toEqual(AppNumberofEventsState);
+    AppWrapper.unmount();
+  });
+
+  test('display only the "numberOfEvents" events set in the textbox', async () => {
+    const AppWrapper = mount(<App />);
+    const allEvents = await getEvents();
+    const maxEvents = 3;
+    AppWrapper.setState({ events: allEvents });
+    //const AppNumberofEventsState = AppWrapper.state('numberOfEvents');
+    const EventListWrapper = AppWrapper.find(EventList);
+    const NumberofEventsWrapper = AppWrapper.find(NumberofEvents);
+    const eventObject = { target: { value: maxEvents } };
+    await NumberofEventsWrapper.find('#number-of-events').simulate('change', eventObject);
+    expect(AppWrapper.state('events').length).toBeLessThanOrEqual(maxEvents);
+    //expect(EventListWrapper.find('.EventItem').length).toBeLessThanOrEqual(maxEvents);
+    AppWrapper.unmount();
+  });
 });

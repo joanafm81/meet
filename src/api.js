@@ -38,7 +38,7 @@ export const getEvents = async () => {
 
   if (token) {
     removeQuery();
-    const url = 'https://joanafm81.github.io/meet/api/get-events' + '/' + token;
+    const url = 'https://0gb2ww5e79.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/' + token;
     const result = await axios.get(url);
     if (result.data) {
       var locations = extractLocations(result.data.events);
@@ -60,7 +60,7 @@ export const getAccessToken = async () => {
     const code = await searchParams.get("code");
     if (!code) {
       const results = await axios.get(
-        "https://joanafm81.github.io/meet/api/get-auth-url"
+        "https://0gb2ww5e79.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url"
       );
       const { authUrl } = results.data;
       return (window.location.href = authUrl);
@@ -88,7 +88,7 @@ const getToken = async (code) => {
   try {
     const encodeCode = encodeURIComponent(code);
 
-    const response = await fetch('https://joanafm81.github.io/meet/api/token' + '/' + encodeCode);
+    const response = await fetch('https://0gb2ww5e79.execute-api.eu-central-1.amazonaws.com/dev/api/token/' + encodeCode);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }

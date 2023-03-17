@@ -22,7 +22,7 @@ class Event extends Component {
         <span className="start-date">{event.start.dateTime} ({event.start.timeZone})</span><span className="location">@{event.location}</span>
       </p>
       {this.state.collapsed ?
-        <button className="show-details" onClick={this.handleItemClicked}>Show Details</button>
+        <button className="show-details details-btn" onClick={this.handleItemClicked}>Show Details</button>
         :
         <><p>
           <a className="html-link" href={event.htmlLink}>See details on Google Calendar</a>
@@ -31,7 +31,7 @@ class Event extends Component {
             <span className="description">{event.description}</span>
           </p>
 
-          <button className="hide-details" onClick={this.handleItemClicked}>Hide Details</button>
+          <button className="hide-details details-btn" onClick={this.handleItemClicked}>Hide Details</button>
         </>
       }
     </div>

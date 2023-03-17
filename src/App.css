@@ -78,13 +78,18 @@ input[type="number"] {
   background-color: #bcdcdb;
 }
 
-.event {
+.Event {
   padding: 10px 10px 35px;
   margin-bottom: 10px;
   text-align: left;
   border: 1px solid #ccc;
   border-radius: 4px;
   position: relative;
+}
+
+.Event:hover {
+  background-color: #ebebeb;
+  border-color: #999;
 }
 
 .details-btn {
@@ -95,6 +100,9 @@ input[type="number"] {
   border-radius: 4px;
   outline: none;
   cursor: pointer;
+  border: 0;
+  background: lightblue;
+  color: darkblue;
 }
 
 .name {
