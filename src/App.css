@@ -2,7 +2,7 @@
 
 .App {
   text-align: center;
-  padding: 2% 5%;
+  padding: 3rem 5%;
 }
 
 .App * {
@@ -140,7 +140,13 @@ input[type="number"] {
 
 .Alert {
   position: fixed;
-  top: 20px;
+  top: 0;
+
+}
+
+.Alert p {
+  color: #fff;
+  margin: 0;
 }
 
 .data-vis-wrapper {
