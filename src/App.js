@@ -3,11 +3,13 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberofEvents from './NumberofEvents';
+import EventGenre from './EventGenre';
 //import { getEvents, extractLocations } from './api';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import './nprogress.css';
 import { WarningAlert } from './Alert';
 import WelcomeScreen from './WelcomeScreen';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 
 class App extends Component {
@@ -75,6 +77,7 @@ class App extends Component {
   };
 
   render() {
+    const { events } = this.state;
     if (this.state.showWelcomeScreen === undefined) return <div className="App" />
 
     return (
@@ -84,6 +87,28 @@ class App extends Component {
         <h4>Choose your nearest city</h4>
         <CitySearch locations={this.state.locations} updateEvents={(location) => { this.updateEvents(location) }} />
         <NumberofEvents updateEvents={(count) => { this.updateEvents(undefined, count) }} />
+
+        <h4>Events in each city</h4>
+        <div className="data-vis-wrapper">
+          <EventGenre events={events} />
+          <ResponsiveContainer height={400} >
+            <ScatterChart
+              margin={{
+                top: 20,
+                right: 20,
+                bottom: 20,
+                left: 20,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="city" type="category" name="city" />
+              <YAxis dataKey="number" type="number" name="number of events" />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+              <Scatter data={this.getData()} fill="#2364aa" />
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
+
         <EventList events={this.state.events} />
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
       </div>
